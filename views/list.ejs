@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>To do list</title>
-
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-
-<body>
+<%- include("header") -%>  <!--add header template from views/header.ejs-->
 
     <div class="box" id="heading">
         <% if (listTitle==="Saturday" || listTitle==="Sunday" ) { %>
@@ -33,10 +24,7 @@
     </div>
 
 
+<%- include("footer") -%>  <!--add header template from views/header.ejs-->
 
 
   
-
-</body>
-
-</html>
