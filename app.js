@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 let items = ["Buy grocery", "Make dinner", "Learn more code"];
+let workItems = [];
 
 app.set("view engine", "ejs");
 
@@ -46,14 +47,34 @@ app.get("/", function (req, res) {
     //     default:
     //         console.log("Error: current day is equal to: " + currentDay);
     //}
-    res.render("list", { kindOfDay: day, newListItem: items });
+    res.render("list", { listTitle: day, newListItem: items });
 
 });
 
 app.post("/", function(req, res){
     let item = req.body.newItem;
-    items.push(item);
-    res.redirect("/");  //when post request is triggered, we same the req.body.newItem and redirect to "/", where there is new item updated in list
+    // items.push(item);
+    // res.redirect("/");  
+    //console.log(req.body);  //req.body includes <input> (name="newItem") and <button> (name="list") inside <form> in the list.ejs
+                              //in <form>, action="/", so it will post the added content in "/" eventhough we post from /work
+                              //we use the if-else below to fix this problem:
+    if(req.body.list === "Work"){  //when we post in /work, the listTitle is "Work List", which is shown as "Work" in req.body.list
+        workItems.push(item);
+        res.redirect("/work");
+    } else {
+        items.push(item);
+        res.redirect("/");  //when post request is triggered, we add req.body.newItem to the items array and redirect to "/", where there is new item updated in list
+
+    }
+})
+
+app.get("/work", function(req, res){
+    res.render("list", {listTitle: "Work List", newListItem: workItems});
+});
+app.post("/work", function(req, res){
+    let item = req.body.newItem;
+    workItems.push(item);
+    res.redirect("/work");
 })
 
 app.listen(3000, function () {
@@ -61,8 +82,3 @@ app.listen(3000, function () {
 });
 
 
-// if (kindOfDay === "Saturday" || kindOfDay === "Sunday"){   <!--<% is scriptlet tag, for control-flow, no output--> 
-//     <h1 style="color: purple"><%= kindOfDay %> To Do List</h1>   <!-- <%= will output the value into the template (html escape)-->
-// } else {
-//     <h1 style="color: blue"><%= kindOfDay %> To Do List</h1>
-// } 

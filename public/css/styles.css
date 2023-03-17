@@ -9,6 +9,10 @@ h1 {
   color: #fff;
   padding: 10px;
 }
+h2{
+  color: white;
+  padding-bottom: 10px;
+}
 
 .box {
   max-width: 400px;
@@ -34,12 +38,12 @@ h1 {
   border-bottom: 0;
 }
 
-input:checked+p {
+input:checked+p {  /*select all <p> after checked <input>*/
   text-decoration: line-through;
   text-decoration-color: #A683E3;
 }
 
-input[type="checkbox"] {
+input[type="checkbox"] {  /*select the <input> with type checkbox*/
   margin: 20px;
 }
 
