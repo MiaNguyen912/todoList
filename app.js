@@ -1,10 +1,14 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const date = require(__dirname + "/date.js");  //date.js is the module we created by our own, not installed by npm
+                                                //when we run node app.js in terminal, it will go to date.js and read everything in their
+//console.log(date()); //print out what is exported from the date module, which is function getDate, we add () to call the function and get the returned value
+
 
 const app = express();
 
-let items = ["Buy grocery", "Make dinner", "Learn more code"];
-let workItems = [];
+const items = ["Buy grocery", "Make dinner", "Learn more code"]; //we can change item inside const arrays, but cant assign them to other arrays
+const workItems = [];
 
 app.set("view engine", "ejs");
 
@@ -12,41 +16,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public")); //let server use our static folder public
 
 app.get("/", function (req, res) {
-    let today = new Date();
-    let options = {  //to format the day on javacript
-        weekday: "long",
-        day: "numeric",
-        month: "long"
-    }
-    let day = today.toLocaleDateString("en-US", options);  //day will be "Monday" to "Sunday", this method is equal to the switch statement below
+    // let day = date.getDate();  //"date.getDate" get what is exported from the date module, which is function getDate, we add () to call the function and get the returned value
+    let day = date.getDay();
 
-    // let currentDay = today.getDay();
-    // let day = "";
-    // switch (currentDay) {
-    //     case 0:
-    //         day = "Sunday";
-    //         break;
-    //     case 1:
-    //         day = "Monday";
-    //         break;
-    //     case 2:
-    //         day = "Tuesday";
-    //         break;
-    //     case 3:
-    //         day = "Wednesday";
-    //         break;
-    //     case 4:
-    //         day = "Thursday";
-    //         break;
-    //     case 5:
-    //         day = "Friday";
-    //         break;
-    //     case 6:
-    //         day = "Saturday";
-    //         break;
-    //     default:
-    //         console.log("Error: current day is equal to: " + currentDay);
-    //}
     res.render("list", { listTitle: day, newListItem: items });
 
 });
