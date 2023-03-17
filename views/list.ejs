@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To do list</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <% if (kindOfDay === "Saturday" || kindOfDay === "Sunday") { %> 
+        <h1 style="color: yellow"><%= kindOfDay %> To Do List</h1> 
+    <% } else { %> 
+        <h1 style="color: white"><%= kindOfDay %> To Do List</h1>
+    <% } %> 
+
+    <ul>
+        <% for (var i=0; i<newListItem.length; i++){ %>  <!-- an array is passed in as a newListItem -->
+            <li><%= newListItem[i] %></li>  <!--create a new list item for each item in array-->
+        <% } %>
+    </ul>
+    <form method="post" action="/">
+        <input type="text" name="newItem">
+        <button type="submit" name="button">Add</button>
+    </form>
+    
+</body>
+</html>
