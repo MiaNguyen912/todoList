@@ -3,5 +3,5 @@ create a to-do list using EJS (javaScript template) (based on Angela Yu's tutori
 
 -----------------
 - Clone the repository to your local repos
-- In the terminal, type "npm install" to install all necessary packages
+- In the terminal, type "npm init" then "npm install" to install all necessary packages
 - use nodemon to run the project on your local port 3000
